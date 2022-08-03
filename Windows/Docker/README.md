@@ -19,10 +19,10 @@ There are two scripts for removing data from within Docker.
 
 ##### Soft-Reset-Docker.ps1
 
-:tw-26d4: Be sure you want to run this, can not be restored!
+Be sure you want to run this, can not be restored!
 For all containers, remove them, delete networks and volumes. It just doesn't delete the images.
 
 ##### Reset-Docker.ps1
 
-:tw-26d4: Be sure you want to run this, can not be restored!
+Be sure you want to run this, can not be restored!
 Absolutely removes everything from Docker, including the images.
