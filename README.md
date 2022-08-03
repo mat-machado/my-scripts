@@ -1,2 +1,3 @@
 # my-scripts
-Scripts to use daily
+
+Scripts for everyday use, both for Windows and Linux.
