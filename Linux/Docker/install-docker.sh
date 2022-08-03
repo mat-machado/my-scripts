@@ -63,4 +63,6 @@ do_install() {
 do_install
 echo ""
 echo "Docker has been succesfully installed!"
+echo ""
+echo "Now logout and log in again to use Docker commands."
 exit 0
