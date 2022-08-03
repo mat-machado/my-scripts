@@ -47,6 +47,7 @@ do_install() {
 
     echo ""
     echo "# Initializing Docker install..."
+    echo "It is not stuck! Just wait until the script close it self!!"
     $sh_c 'apt-get update -qq >/dev/null'
     $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
     $sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
