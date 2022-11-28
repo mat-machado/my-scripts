@@ -43,7 +43,7 @@ do_install() {
     pre_reqs="apt-transport-https ca-certificates curl gnupg lsb-release"
     download_url="https://download.docker.com"
     apt_repo="deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] $download_url/linux/ubuntu $(lsb_release -cs) stable"
-    docker_pkgs="docker-ce docker-ce-cli containerd.io docker-compose-plugin"
+    docker_pkgs="docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-ce-rootless-extras"
 
     echo ""
     echo "# Initializing Docker install..."
@@ -56,7 +56,9 @@ do_install() {
     $sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
     $sh_c "apt-get update -qq >/dev/null"
     $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends $docker_pkgs >/dev/null"
+    $sh_c "groupadd docker"
     $sh_c "usermod -aG docker $USER"
+    $sh_c "newgrp docker"
     $sh_c "systemctl enable docker.service >/dev/null"
     $sh_c "systemctl enable containerd.service >/dev/null"
 }
