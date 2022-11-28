@@ -21,11 +21,11 @@ do_install() {
     echo ""
 
     if command_exists docker; then
-        cat >&2 <<-'EOF'
+        cat >&2 <<-"EOF"
 			Warning: the "docker" command appears to already exist on this system.
 
 			If you already have Docker installed, this script can cause trouble, which is
-			why we're displaying this warning and provide the opportunity to cancel the
+			why we"re displaying this warning and provide the opportunity to cancel the
 			installation.
 
 			If you installed the current Docker package using this script and are using it
@@ -39,7 +39,7 @@ do_install() {
         )
     fi
 
-    sh_c='sh -c'
+    sh_c="sh -c"
     pre_reqs="apt-transport-https ca-certificates curl gnupg lsb-release"
     download_url="https://download.docker.com"
     apt_repo="deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] $download_url/linux/ubuntu $(lsb_release -cs) stable"
@@ -48,17 +48,17 @@ do_install() {
     echo ""
     echo "# Initializing Docker install..."
     echo "It is not stuck! Just wait until the script close it self!!"
-    $sh_c 'apt-get update -qq >/dev/null'
+    $sh_c "apt-get update -qq >/dev/null"
     $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq $pre_reqs >/dev/null"
-    $sh_c 'mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings'
+    $sh_c "mkdir -p /etc/apt/keyrings && chmod -R 0755 /etc/apt/keyrings"
     $sh_c "curl -fsSL \"$download_url/linux/ubuntu/gpg\" | gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
     $sh_c "chmod a+r /etc/apt/keyrings/docker.gpg"
     $sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
-    $sh_c 'apt-get update -qq >/dev/null'
+    $sh_c "apt-get update -qq >/dev/null"
     $sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends $docker_pkgs >/dev/null"
     $sh_c "usermod -aG docker $USER"
-    $sh_c 'systemctl enable docker.service >/dev/null'
-    $sh_c 'systemctl enable containerd.service >/dev/null'
+    $sh_c "systemctl enable docker.service >/dev/null"
+    $sh_c "systemctl enable containerd.service >/dev/null"
 }
 
 do_install
